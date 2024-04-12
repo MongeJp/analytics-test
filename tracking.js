@@ -1,17 +1,18 @@
 import { v4 as uuidv4 } from "uuid";
 
 const METRIC = "facebook";
-const url = process.env.TRACKING_LAMBDA_URL;
+const url = import.meta.env.VITE_TRACKING_LAMBDA_URL;
+const TRACKING_ID_KEY = "jibjab_tracking_id";
 
 export const setupTrackingId = () => {
-  const trackingId = localStorage.getItem("trackingId");
-  if (!trackingId) localStorage.setItem("trackingId", uuidv4());
+  const trackingId = localStorage.getItem(TRACKING_ID_KEY);
+  if (!trackingId) localStorage.setItem(TRACKING_ID_KEY, uuidv4());
 
   return trackingId;
 };
 
 export const getTrackingId = () => {
-  return localStorage.getItem("trackingId") || setTrackingId();
+  return localStorage.getItem(TRACKING_ID_KEY) || setTrackingId();
 };
 
 const getCurrentDateInUTC = () => {
