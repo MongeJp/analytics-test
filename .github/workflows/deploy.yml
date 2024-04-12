@@ -8,7 +8,7 @@ on:
     inputs:
       environment:
         description: 'Select the deployment environment:'
-        required: true
+        required: false
         type: choice
         options:
           - integration
@@ -20,7 +20,7 @@ jobs:
   build-and-upload:
     name: Build and Upload to S3
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    environment: ${{ github.event.inputs.environment || 'integration' }}
 
     steps:
     - name: Checkout code
